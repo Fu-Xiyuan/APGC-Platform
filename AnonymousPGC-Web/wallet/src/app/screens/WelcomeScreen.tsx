@@ -103,7 +103,15 @@ function MobileTopology() {
         <g transform="translate(206 130)">
           <circle className="wallet-mobile-core-shell" r="48" />
           <circle className="wallet-mobile-core-fill" r="34" />
-          <text className="wallet-mobile-core-title" textAnchor="middle" y="7">APGC</text>
+          <text
+            className="wallet-mobile-core-title"
+            x="0"
+            y="0"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            APGC
+          </text>
         </g>
       </svg>
     </div>
