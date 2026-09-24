@@ -38,7 +38,7 @@ jobs:
       - name: Build wallet
         working-directory: AnonymousPGC-Web/wallet
         env:
-          VITE_PUBLIC_BASE: /AnonymousPGC-Platform/wallet/
+          VITE_PUBLIC_BASE: /APGC-Platform/wallet/
           VITE_APGC_API_URL: https://38.22.90.167
           VITE_APGC_API_TIMEOUT_MS: "120000"
         run: |
@@ -48,7 +48,7 @@ jobs:
       - name: Build chain monitor
         working-directory: AnonymousPGC-Web/chain-monitor
         env:
-          VITE_PUBLIC_BASE: /AnonymousPGC-Platform/monitor/
+          VITE_PUBLIC_BASE: /APGC-Platform/monitor/
           VITE_APGC_API_URL: https://38.22.90.167
           VITE_APGC_API_TIMEOUT_MS: "120000"
         run: |
@@ -58,7 +58,7 @@ jobs:
       - name: Build desktop wallet
         working-directory: AnonymousPGC-Web-Desktop
         env:
-          VITE_PUBLIC_BASE: /AnonymousPGC-Platform/desktop/
+          VITE_PUBLIC_BASE: /APGC-Platform/
           VITE_APGC_API_URL: https://38.22.90.167
           VITE_APGC_API_TIMEOUT_MS: "120000"
         run: |
@@ -67,11 +67,10 @@ jobs:
 
       - name: Assemble Pages artifact
         run: |
-          mkdir -p pages-output/wallet pages-output/monitor pages-output/desktop
-          cp -a site/. pages-output/
+          mkdir -p pages-output/wallet pages-output/monitor
+          cp -a AnonymousPGC-Web-Desktop/dist/. pages-output/
           cp -a AnonymousPGC-Web/wallet/dist/. pages-output/wallet/
           cp -a AnonymousPGC-Web/chain-monitor/dist/. pages-output/monitor/
-          cp -a AnonymousPGC-Web-Desktop/dist/. pages-output/desktop/
           touch pages-output/.nojekyll
 
       - name: Configure Pages

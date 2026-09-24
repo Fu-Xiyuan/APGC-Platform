@@ -1,6 +1,9 @@
-# AnonymousPGC Platform
+# APGC Platform
 
-Public browser clients for the AnonymousPGC research demonstration.
+Public browser clients for the APGC research demonstration.
+
+The desktop wallet is deployed at the GitHub Pages root. The mobile wallet and
+chain monitor remain available under `/wallet/` and `/monitor/`.
 
 - `AnonymousPGC-Web/wallet`: mobile wallet interface
 - `AnonymousPGC-Web/chain-monitor`: genesis and chain monitor interface

@@ -328,8 +328,7 @@ function TopologyBackdrop() {
         <g className="topology-core" transform="translate(510 338)">
           <circle className="topology-core-shell" r="108" />
           <circle className="topology-core-fill" r="76" />
-          <text className="topology-core-title" textAnchor="middle" y="-8">APGC</text>
-          <text className="topology-core-subtitle" textAnchor="middle" y="34">PRIVATE</text>
+          <text className="topology-core-title" textAnchor="middle" y="10">APGC</text>
         </g>
       </svg>
     </div>
