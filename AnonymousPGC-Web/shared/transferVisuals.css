@@ -1,0 +1,364 @@
+.apgc-flow-visual {
+  --apgc-visual-bg: #f3faf8;
+  --apgc-visual-surface: #ffffff;
+  --apgc-visual-border: rgba(8, 127, 120, 0.20);
+  --apgc-visual-track: rgba(8, 127, 120, 0.24);
+  --apgc-visual-text: #172033;
+  --apgc-visual-muted: #536c67;
+  --apgc-visual-primary: #087f78;
+  --apgc-visual-success: #20a99b;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--apgc-visual-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--apgc-visual-primary) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(180deg, color-mix(in srgb, var(--apgc-visual-primary) 4%, transparent) 1px, transparent 1px),
+    var(--apgc-visual-bg);
+  background-size: 44px 44px, 44px 44px, auto;
+}
+
+.dark .apgc-flow-visual,
+:root[data-apgc-theme="dark"] .apgc-flow-visual,
+:root:not([data-apgc-theme="light"]) .app-shell .apgc-flow-visual {
+  --apgc-visual-bg: #06101f;
+  --apgc-visual-surface: #0c1d35;
+  --apgc-visual-border: rgba(130, 169, 204, 0.22);
+  --apgc-visual-track: rgba(103, 232, 249, 0.22);
+  --apgc-visual-text: #f4f7fb;
+  --apgc-visual-muted: #9fb1c6;
+  --apgc-visual-primary: #22d3ee;
+  --apgc-visual-success: #34d399;
+}
+
+.apgc-flow-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 58%, color-mix(in srgb, var(--apgc-visual-bg) 84%, transparent));
+}
+
+.apgc-flow-visual svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.apgc-visual-heading {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--apgc-visual-muted);
+  font-size: 10px;
+}
+
+.apgc-visual-heading span,
+.apgc-visual-heading strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.apgc-visual-heading strong {
+  color: var(--apgc-visual-text);
+  font-weight: 700;
+}
+
+.apgc-flow-track {
+  fill: none;
+  stroke: var(--apgc-visual-track);
+  stroke-width: 1.15;
+  stroke-linecap: round;
+}
+
+.apgc-flow-beam {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 34 210;
+  opacity: 0.78;
+  filter: drop-shadow(0 0 4px rgba(20, 241, 217, 0.42));
+  animation: apgc-visual-flow 3.4s linear infinite;
+}
+
+.apgc-flow-beam.output {
+  animation-duration: 4.2s;
+}
+
+.apgc-flow-beam:not(.active) {
+  animation-play-state: paused;
+}
+
+.apgc-recipient-flow .apgc-flow-beam {
+  animation-play-state: running;
+}
+
+.apgc-source-aura {
+  fill: color-mix(in srgb, #276df2 12%, transparent);
+  stroke: color-mix(in srgb, #276df2 30%, transparent);
+}
+
+.apgc-source-core {
+  fill: #276df2;
+  filter: drop-shadow(0 7px 12px rgba(39, 109, 242, 0.25));
+}
+
+.apgc-source-label,
+.apgc-source-amount {
+  fill: #ffffff;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.apgc-source-label { font-size: 9px; }
+.apgc-source-amount { font-size: 7px; opacity: 0.78; }
+
+.apgc-contract-shell {
+  fill: color-mix(in srgb, var(--apgc-visual-surface) 84%, transparent);
+  stroke: color-mix(in srgb, var(--apgc-visual-primary) 48%, transparent);
+  stroke-width: 1.6;
+}
+
+.apgc-contract-core {
+  fill: #14b8a6;
+  stroke: rgba(255, 255, 255, 0.32);
+  stroke-width: 0.8;
+  transition: opacity 300ms ease;
+}
+
+.apgc-contract-core.active {
+  animation: apgc-core-breathe 2.2s ease-in-out infinite;
+}
+
+.apgc-contract-title,
+.apgc-contract-subtitle {
+  fill: #ffffff;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.apgc-contract-title { font-size: 13px; }
+.apgc-contract-subtitle { font-size: 6px; opacity: 0.76; }
+.apgc-flow-visual.wide .apgc-contract-title { font-size: 17px; }
+.apgc-flow-visual.wide .apgc-contract-subtitle { font-size: 8px; }
+
+.apgc-endpoint-ring {
+  fill: color-mix(in srgb, var(--apgc-visual-surface) 78%, transparent);
+  stroke: color-mix(in srgb, var(--apgc-visual-primary) 45%, transparent);
+  stroke-width: 1;
+}
+
+.apgc-endpoint-ring.confirmed {
+  stroke: var(--apgc-visual-success);
+  animation: apgc-endpoint-confirm 700ms ease-out both;
+}
+
+.apgc-endpoint-dot {
+  fill: var(--apgc-visual-primary);
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--apgc-visual-primary) 50%, transparent));
+}
+
+.apgc-endpoint-label,
+.apgc-endpoint-amount,
+.apgc-stage-caption,
+.apgc-input-meta,
+.apgc-artifact-layer text {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0;
+}
+
+.apgc-endpoint-label {
+  fill: var(--apgc-visual-text);
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.apgc-endpoint-amount {
+  fill: var(--apgc-visual-muted);
+  font-size: 6px;
+}
+
+.apgc-flow-visual.wide .apgc-endpoint-label { font-size: 10px; }
+.apgc-flow-visual.wide .apgc-endpoint-amount { font-size: 8px; }
+
+.apgc-stage-caption {
+  fill: var(--apgc-visual-muted);
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.apgc-flow-visual.wide .apgc-stage-caption { font-size: 9px; }
+
+.apgc-private-input {
+  fill: var(--apgc-visual-primary);
+  opacity: 0.62;
+  animation: apgc-input-pulse 2.4s ease-in-out infinite;
+}
+
+.apgc-input-meta {
+  fill: var(--apgc-visual-muted);
+  font-size: 6px;
+}
+
+.apgc-flow-visual.wide .apgc-input-meta { font-size: 8px; }
+
+.apgc-proof-orbit,
+.apgc-contract-orbit {
+  fill: none;
+  stroke: var(--apgc-visual-track);
+  stroke-width: 1;
+  stroke-dasharray: 3 8;
+}
+
+.apgc-proof-orbit.active,
+.apgc-contract-execution.active .apgc-contract-orbit {
+  animation: apgc-orbit-turn 16s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.apgc-artifact-layer rect {
+  fill: color-mix(in srgb, var(--apgc-visual-surface) 86%, transparent);
+  stroke: var(--apgc-visual-border);
+  stroke-width: 1;
+  opacity: 0.42;
+  transition: opacity 350ms ease, stroke 350ms ease;
+}
+
+.apgc-artifact-layer text {
+  fill: var(--apgc-visual-muted);
+  font-size: 6px;
+  font-weight: 700;
+  transition: fill 350ms ease;
+}
+
+.apgc-flow-visual.wide .apgc-artifact-layer text { font-size: 8px; }
+
+.apgc-artifact-layer.active rect {
+  stroke: color-mix(in srgb, var(--apgc-visual-primary) 56%, transparent);
+  opacity: 1;
+}
+
+.apgc-artifact-layer.active text { fill: var(--apgc-visual-text); }
+.apgc-artifact-layer.sealed rect { stroke: color-mix(in srgb, var(--apgc-visual-success) 65%, transparent); }
+
+.apgc-artifact-check circle,
+.apgc-contract-check circle {
+  fill: var(--apgc-visual-success);
+}
+
+.apgc-artifact-check svg,
+.apgc-artifact-check path,
+.apgc-contract-check svg,
+.apgc-contract-check path {
+  color: #ffffff;
+  stroke: #ffffff;
+}
+
+.apgc-check-mark {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.apgc-contract-member {
+  fill: var(--apgc-visual-primary);
+  opacity: 0.54;
+}
+
+.apgc-contract-member.processing {
+  animation: apgc-account-update 1.8s ease-in-out infinite;
+}
+
+.apgc-contract-execution.confirmed .apgc-contract-member {
+  fill: var(--apgc-visual-success);
+  opacity: 0.72;
+  animation: none;
+}
+
+.apgc-contract-execution:not(.active):not(.confirmed) .apgc-flow-beam {
+  opacity: 0.2;
+  animation-play-state: paused;
+}
+
+.apgc-contract-execution.confirmed .apgc-flow-beam {
+  stroke-dasharray: none;
+  opacity: 0.72;
+  animation: none;
+}
+
+.apgc-contract-legend {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 14px;
+  margin: -12px 12px 12px;
+  color: var(--apgc-visual-muted);
+  font-size: 9px;
+}
+
+.apgc-contract-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.apgc-contract-legend i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--apgc-visual-primary);
+}
+
+.apgc-contract-legend i.amount { background: #f2b84b; }
+
+@keyframes apgc-visual-flow {
+  to { stroke-dashoffset: -244; }
+}
+
+@keyframes apgc-core-breathe {
+  50% { opacity: 0.78; }
+}
+
+@keyframes apgc-input-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes apgc-orbit-turn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes apgc-account-update {
+  0%, 100% { opacity: 0.34; }
+  50% { opacity: 1; }
+}
+
+@keyframes apgc-endpoint-confirm {
+  0% { opacity: 0.2; stroke-width: 5; }
+  100% { opacity: 1; stroke-width: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apgc-flow-visual * {
+    animation: none !important;
+  }
+}

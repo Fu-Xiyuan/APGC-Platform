@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.frontend.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["../AnonymousPGC-Web/shared/*"]
+    }
+  },
+  "include": ["src", "../AnonymousPGC-Web/shared"]
+}
